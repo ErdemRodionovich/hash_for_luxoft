@@ -1,6 +1,7 @@
 #pragma once
 
 #include <vector>
+#include "hash_container.h"
 
 template<typename T>
 class HashForLuxoft{
@@ -13,9 +14,6 @@ public:
 	void display();
 
 private:
-	std::size_t m_p = 0;
-	std::size_t m_a = 0;
-	std::size_t m_b = 0;
-
+	HashContainer<HashContainer<T>> m_table;
 };
 

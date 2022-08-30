@@ -1,7 +1,9 @@
 #include "hash_for_luxoft.h"
 
 template<typename T>
-HashForLuxoft<T>::HashForLuxoft() {
+HashForLuxoft<T>::HashForLuxoft()
+	: m_table()
+{
 }
 
 template<typename T>
