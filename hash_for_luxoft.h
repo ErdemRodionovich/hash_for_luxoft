@@ -6,6 +6,7 @@
 
 template<typename T>
 class HashForLuxoft: protected HashContainer<std::unique_ptr<HashContainer<T>>>{
+	using Base = HashContainer<std::unique_ptr<HashContainer<T>>>;
 public:
 	HashForLuxoft();
 
@@ -15,6 +16,5 @@ public:
 	void display();
 
 private:
-
 	HashContainer<T> & containerForValue(const T & value);
 };

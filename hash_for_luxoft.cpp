@@ -1,5 +1,6 @@
 #include "hash_for_luxoft.h"
 #include "hash_container.h"
+#include <iostream>
 
 template<typename T>
 HashForLuxoft<T>::HashForLuxoft()
@@ -8,14 +9,14 @@ HashForLuxoft<T>::HashForLuxoft()
 
 template<typename T>
 void HashForLuxoft<T>::add(T &&value) {
-	if(m_count == m_values.size()){
-		resize(true);
+	if(Base::m_count == Base::m_values.size()){
+		Base::resize(true);
 	}
 	auto & container = containerForValue(value);
 	if(container.empty()){
-		++m_count;
+		++Base::m_count;
 	}
-	container.add(key, std::move(value));
+	container.add(hash(value), std::move(value));
 }
 
 template<typename T>
@@ -23,10 +24,10 @@ void HashForLuxoft<T>::remove(const T &value) {
 	auto & container = containerForValue(value);
 	container.remove(value);
 	if(container.empty()){
-		--m_count;
+		--Base::m_count;
 	}
-	if(m_count < m_values.size() / 3){
-		resize(false);
+	if(Base::m_count < Base::m_values.size() / 3){
+		Base::resize(false);
 	}
 }
 
@@ -37,14 +38,19 @@ bool HashForLuxoft<T>::find(const T &value) {
 
 template<typename T>
 void HashForLuxoft<T>::display() {
-
+	for(auto & it: Base::m_values){
+		for(auto & container: it){
+			std::cout<<std::endl;
+			container.display();
+		}
+	}
 }
 
 template<typename T>
 HashContainer<T>& HashForLuxoft<T>::containerForValue(const T &value) {
 	std::size_t key = hash(value);
-	std::size_t i = index(key);
-	auto & storage = m_values[i];
+	std::size_t i = Base::index(key);
+	auto & storage = Base::m_values[i];
 	if(storage.empty()){
 		storage.push_back(HashContainer<T>());
 	}

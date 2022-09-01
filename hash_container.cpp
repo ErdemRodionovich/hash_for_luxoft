@@ -70,7 +70,7 @@ void HashContainer<T>::resize(bool toUpper){
 	if(newSize == 0 && toUpper){
 		newSize = 1;
 	}
-	std::list<std::list<T>::iterator> forDelete;
+	std::list<typename std::list<T>::iterator> forDelete;
 	for(std::size_t i=0; i<m_values.size(); ++i){
 		for(auto it = m_values[i].begin(); it != m_values[i].end(); ++it){
 			std::size_t key = hash(*it);

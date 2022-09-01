@@ -40,6 +40,7 @@ public:
 protected:
 	std::size_t m_count = 0;
 	std::vector<std::list<T>> m_values;
+
 	std::size_t index(const std::size_t & key, std::size_t m = 0);
 	void resize(bool toUpper);
 
@@ -48,6 +49,9 @@ private:
 	std::size_t m_a = 0;
 	std::size_t m_b = 0;
 	std::size_t m_id = 0;
-
-
 };
+
+template<typename T>
+std::size_t hash(const HashContainer<T> & container){
+	return container.id();
+}
