@@ -4,11 +4,11 @@
 #include <iostream>
 
 template<typename T>
-bool HashContainer<T>::add(const std::size_t & key, T &&value) {
-	std::size_t i = index(key);
+void HashContainer<T>::add(const std::size_t & key, T &&value) {
 	if(m_count == m_values.size()){
 		resize(true);
 	}
+	std::size_t i = index(key);
 	std::list<T> & storage = m_values[i];
 	if(storage.empty() || std::find(storage.begin(), storage.end(), value) == storage.end()){
 		storage.push_back(std::move(value));

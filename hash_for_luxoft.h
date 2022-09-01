@@ -1,19 +1,20 @@
 #pragma once
 
 #include <vector>
+#include <memory>
 #include "hash_container.h"
 
 template<typename T>
-class HashForLuxoft{
+class HashForLuxoft: protected HashContainer<std::unique_ptr<HashContainer<T>>>{
 public:
 	HashForLuxoft();
 
-	bool add(T && value);
+	void add(T && value);
 	void remove(const T & value);
 	bool find(const T & value);
 	void display();
 
 private:
-	HashContainer<HashContainer<T>> m_table;
-};
 
+	HashContainer<T> & containerForValue(const T & value);
+};
