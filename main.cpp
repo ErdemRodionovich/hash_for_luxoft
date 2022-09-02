@@ -8,6 +8,9 @@ int main(int argc, char **argv) {
 	std::cout<<"Hello!";
 	SomeHash<int> h;
 	h.add(0);    //
+	h.add(1);    //
+	h.add(2);    //
+	h.add(3);    //
 	h.remove(0);  // required interfaces
 	h.find(1);   //
 	h.display();  // shows all values in hash with their positions

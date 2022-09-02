@@ -2,10 +2,10 @@
 #include "hash_container.h"
 #include <iostream>
 
-template<typename T>
-HashForLuxoft<T>::HashForLuxoft()
-	: HashContainer<std::unique_ptr<HashContainer<T>>>(){
-}
+//template<typename T>
+//HashForLuxoft<T>::HashForLuxoft()
+//	: HashContainer<std::unique_ptr<HashContainer<T>>>(){
+//}
 
 template<typename T>
 void HashForLuxoft<T>::add(T &&value) {

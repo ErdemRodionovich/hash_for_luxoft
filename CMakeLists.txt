@@ -10,9 +10,9 @@ set(CMAKE_CXX_STANDARD_REQUIRED True)
 set(TARGET_SOURCES
 	hasher.cpp
 	hasher.h
-	hash_container.cpp
+	#hash_container.cpp
 	hash_container.h
-	hash_for_luxoft.cpp
+	#hash_for_luxoft.cpp
 	hash_for_luxoft.h
 	main.cpp
 )
