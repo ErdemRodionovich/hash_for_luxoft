@@ -5,7 +5,7 @@ template<typename T>
 using SomeHash = HashForLuxoft<T>;
 
 int main(int argc, char **argv) {
-	std::cout<<"Hello!";
+	std::cout<<"Hash for Luxoft by Erdem Badluev:"<<std::endl;
 	SomeHash<int> h;
 	h.add(0);    //
 	h.add(1);    //

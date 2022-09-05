@@ -5,6 +5,7 @@
 
 template<typename T>
 void HashContainer<T>::add(const std::size_t & key, T &&value) {
+	std::cout<<__FUNCTION__<<" "<<__LINE__<<std::endl;
 	if(m_count == m_values.size()){
 		resize(true);
 	}
@@ -14,6 +15,7 @@ void HashContainer<T>::add(const std::size_t & key, T &&value) {
 		storage.push_back(std::move(value));
 		++m_count;
 	}
+	std::cout<<__FUNCTION__<<" "<<__LINE__<<std::endl;
 }
 
 template<typename T>
@@ -34,6 +36,7 @@ void HashContainer<T>::remove(const std::size_t & key, const T &value) {
 
 template<typename T>
 std::optional<std::reference_wrapper<T>> HashContainer<T>::find(const std::size_t & key, const T &value) {
+	std::cout<<__FUNCTION__<<" "<<__LINE__<<std::endl;
 	std::size_t i = index(key);
 	if(m_values.size() > i){
 		std::list<T> & storage = m_values[i];
@@ -41,6 +44,7 @@ std::optional<std::reference_wrapper<T>> HashContainer<T>::find(const std::size_
 			return std::optional<std::reference_wrapper<T>>(*it);
 		}
 	}
+	std::cout<<__FUNCTION__<<" "<<__LINE__<<std::endl;
 	return std::nullopt;
 }
 

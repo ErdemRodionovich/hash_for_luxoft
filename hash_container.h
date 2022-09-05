@@ -7,6 +7,8 @@
 #include <functional>
 #include <algorithm>
 #include <iostream>
+#include <exception>
+#include <memory>
 
 #include "hasher.h"
 
@@ -15,6 +17,7 @@ class HashContainer{
 public:
 	HashContainer()
 		: m_p(std::numeric_limits<std::size_t>::max())
+		, m_values()
 	{
 		m_a = randomNumber(1, m_p-1);
 		m_b = randomNumber(0, m_p-1);
@@ -99,12 +102,18 @@ protected:
 		if(newSize == 0 && toUpper){
 			newSize = 1;
 		}
+		if(toUpper){
+			m_values.resize(newSize);
+		}
 		std::list<typename std::list<T>::iterator> forDelete;
 		for(std::size_t i=0; i<m_values.size(); ++i){
 			for(auto it = m_values[i].begin(); it != m_values[i].end(); ++it){
 				std::size_t key = hash(*it);
 				std::size_t newIndex = index(key, newSize);
 				if(newIndex != i){
+					if(newIndex < 0 || newIndex >= m_values.size()){
+						throw std::runtime_error("Index out of range!");
+					}
 					m_values[newIndex].push_back(std::move(*it));
 					forDelete.push_back(it);
 				}
@@ -116,7 +125,9 @@ protected:
 				forDelete.clear();
 			}
 		}
-		m_values.resize(newSize);
+		if(!toUpper){
+			m_values.resize(newSize);
+		}
 	}
 
 private:
